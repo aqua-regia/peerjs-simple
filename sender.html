@@ -1,0 +1,22 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.0.0/peerjs.min.js" integrity="sha256-e1yWu3sXOHFexYeDonJSjQVXJzai7A+m2hmSizA253Y=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    // https://0.peerjs.com/syedhassanashraf8888/id?ts=15657002244940.3729908670068536 Response:- ytjeytbr94a00000
+    var peerJsPeer = new Peer('newdeadlysender', {host: 'localhost', port: 9000, path: '/myapp'});
+    peerJsPeer.on('open', function() {
+      console.log('peerJsPeer sender id is:- ##', peerJsPeer.id, '##');
+      connect('newdeadlyreceiver');
+    });
+
+    function connect(peerId){
+      // Connects to the remote peer specified by id and returns a data connection. 
+      // Be sure to listen on the error event in case the connection fails.
+      var conn = peerJsPeer.connect(peerId);
+      conn.on('open', function(){
+        conn.on('data', function(data){
+          console.log("Received:- ##", data, "##");
+        });
+        conn.send('Hello from sender...');
+      });
+    };
+
+</script>
