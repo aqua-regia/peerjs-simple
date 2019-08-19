@@ -1,23 +1,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.0.0/peerjs.min.js" integrity="sha256-e1yWu3sXOHFexYeDonJSjQVXJzai7A+m2hmSizA253Y=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-
-    // https://0.peerjs.com/syedhassanashraf8888/id?ts=15657002244940.3729908670068536 Response:- ytjeytbr94a00000
-    var peerJsPeer = new Peer('newdeadlyreceiver', {host: 'localhost', port: 9000, path: '/myapp'});
-
-    //  Emitted when the connection is established and ready-to-use.
-    peerJsPeer.on('open', function() {
-		  console.log('peerJsPeer reciever id is:- ##', peerJsPeer.id, '##');
+    var peer = new Peer('newdeadlyreceiver', {host: 'localhost', port: 9090, path: '/myapp'});
+    peer.on('open', function() {
+		  console.log('peerJsPeer reciever id is:- ##', peer.id, '##');
     });
-
-    // Emitted when a new data connection is established from a remote peer.
-    peerJsPeer.on('connection', function(peerJsConnection){
-        peerJsConnection.on('open', function(){
-            peerJsConnection.on('data', function(data){
+    peer.on('connection', function(dataChannel){
+        console.log("connection established.. opening data channel")
+        dataChannel.on('open', function(){
+            console.log("data channel opened.. waiting for data")
+            dataChannel.on('data', function(data){
                 console.log('Received:- ##', data, '##');
             });
-
-            // data is serialized by BinaryPack by default and sent to the remote peer.
-            // peerJsConnection.send("Hello From Reciever...");
         });
     });
 </script>
