@@ -1,6 +1,6 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.0.0/peerjs.min.js" integrity="sha256-e1yWu3sXOHFexYeDonJSjQVXJzai7A+m2hmSizA253Y=" crossorigin="anonymous"></script>
+<script src="/Users/syedhassanashraf/Documents/js/webrtc/peerjs-encrypted/dist/peerjs.min.js"></script>
 <script type="text/javascript">
-    var peer = new Peer('newdeadlyreceiver', {host: 'localhost', port: 9090, path: '/myapp'});
+    var peer = new Peer('newdeadlyreceiver', {host: 'localhost', port: 9090, path: '', 'privateKey': '0d87acac69651191b8989cdae8e7f935d05a3534b11e0aae7906ac0d0b597fa2'});
     peer.on('open', function() {
 		  console.log('peerJsPeer reciever id is:- ##', peer.id, '##');
     });
