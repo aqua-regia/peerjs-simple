@@ -1,5 +1,7 @@
+<!-- change the below path to get the source from cloudflare -->
 <script src="/Users/syedhassanashraf/Documents/js/webrtc/peerjs-encrypted/dist/peerjs.min.js"></script>
 <script type="text/javascript">
+    // hex encoded public key string, don't use it
     var peer = new Peer('newdeadlysender', {host: 'localhost', port: 9090, path: '', publicKey: '0495f6160ccd36b0b6d08e0538bf651cad86573b76c4be0beb288b7f25bc7760a1891bb4c8c11f3b44cf038ee8ded12ae39657973b03c77e6953a78f765c3efaa9'});
     peer.on('open', function() {
       console.log('peerjs sender id is:- ##', peer.id, '##');
@@ -8,19 +10,11 @@
 
     function connect(peerId){
       console.log("trying to connect to reciever:-", peerId)
-      peer.connect(peerId, {})
-        .then(function(connection){
-          console.log("connection is:-", connection)
-          conn = connection;
-          conn.on('open', function(){
-          console.log("connection with reciever opened..., sending data")
-          conn.send('Hello from sender...');
-          console.log("data send successfully")
+      var conn = peer.connect(peerId);
+      conn.on('open', function(){
+        console.log("connection with reciever opened..., sending data")
+        conn.send('Hello from sender...');
+        console.log("data send successfully")
       });
-        })
-        .catch(function(error){
-          console.log("returning peer")
-        });
-    };
-
+    }
 </script>

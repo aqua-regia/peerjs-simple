@@ -1,5 +1,8 @@
+<!-- change the below path to get the source from cloudflare -->
 <script src="/Users/syedhassanashraf/Documents/js/webrtc/peerjs-encrypted/dist/peerjs.min.js"></script>
 <script type="text/javascript">
+    // hex encoded private key string, don't use it
+    // you don't need to pass privateKey if you are not using encrypted version of peerjs
     var peer = new Peer('newdeadlyreceiver', {host: 'localhost', port: 9090, path: '', 'privateKey': '0d87acac69651191b8989cdae8e7f935d05a3534b11e0aae7906ac0d0b597fa2'});
     peer.on('open', function() {
 		  console.log('peerJsPeer reciever id is:- ##', peer.id, '##');
