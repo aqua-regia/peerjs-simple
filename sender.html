@@ -2,19 +2,52 @@
 <script src="/Users/syedhassanashraf/Documents/js/webrtc/peerjs-encrypted/dist/peerjs.min.js"></script>
 <script type="text/javascript">
     // hex encoded public key string, don't use it
-    var peer = new Peer('newdeadlysender', {host: 'localhost', port: 9090, path: '', publicKey: '0495f6160ccd36b0b6d08e0538bf651cad86573b76c4be0beb288b7f25bc7760a1891bb4c8c11f3b44cf038ee8ded12ae39657973b03c77e6953a78f765c3efaa9'});
-    peer.on('open', function() {
-      console.log('peerjs sender id is:- ##', peer.id, '##');
-      connect('newdeadlyreceiver');
+    var peer0 = new Peer('newdeadlysender0', {host: 'localhost', port: 9090, path: '', publicKey: '0495f6160ccd36b0b6d08e0538bf651cad86573b76c4be0beb288b7f25bc7760a1891bb4c8c11f3b44cf038ee8ded12ae39657973b03c77e6953a78f765c3efaa9'});
+    // var peer1 = new Peer('newdeadlysender1', {host: 'localhost', port: 9090, path: '', publicKey: '0495f6160ccd36b0b6d08e0538bf651cad86573b76c4be0beb288b7f25bc7760a1891bb4c8c11f3b44cf038ee8ded12ae39657973b03c77e6953a78f765c3efaa9'});
+    // var peer2 = new Peer('newdeadlysender2', {host: 'localhost', port: 9090, path: '', publicKey: '0495f6160ccd36b0b6d08e0538bf651cad86573b76c4be0beb288b7f25bc7760a1891bb4c8c11f3b44cf038ee8ded12ae39657973b03c77e6953a78f765c3efaa9'});
+
+    peer0.on('open', function() {
+      connect('newdeadlyreceiver0', peer0);
     });
 
-    function connect(peerId){
-      console.log("trying to connect to reciever:-", peerId)
+    // peer1.on('open', function() {
+    //   connect('newdeadlyreceiver0', peer1);
+    // });
+
+    // peer2.on('open', function() {
+    //   connect('newdeadlyreceiver0', peer2);
+    // });
+
+    peer0.on('open', function() {
+      connect('newdeadlyreceiver1', peer0);
+    });
+
+    peer0.on('open', function() {
+      connect('newdeadlyreceiver2', peer0);
+    });
+
+    // peer1.on('open', function() {
+    //   connect('newdeadlyreceiver2', peer1);
+    // });
+
+    // peer2.on('open', function() {
+    //   connect('newdeadlyreceiver2', peer2);
+    // });
+
+    // peer2.on('open', function() {
+    //   connect('newdeadlyreceiver3', peer2);
+    // });
+
+    peer0.on('open', function() {
+      connect('newdeadlyreceiver3', peer0);
+    });
+
+    function connect(peerId, peer){
+      console.log(peer._id, " connecting to ", peerId)
       var conn = peer.connect(peerId);
       conn.on('open', function(){
-        console.log("connection with reciever opened..., sending data")
-        conn.send('Hello from sender...');
-        console.log("data send successfully")
+        console.log("connection opened ",conn.provider.id, conn.peer);
+        conn.send('Hello from ' + conn.provider.id);
       });
     }
 </script>
