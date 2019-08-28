@@ -44,10 +44,10 @@
 
     function connect(peerId, peer){
       console.log(peer._id, " connecting to ", peerId)
-      var conn = peer.connect(peerId);
-      conn.on('open', function(){
-        console.log("connection opened ",conn.provider.id, conn.peer);
-        conn.send('Hello from ' + conn.provider.id);
+      var dataChannel = peer.connect(peerId);
+      dataChannel.on('open', function(){                                              //data channel is opened and ready to be used
+        console.log("data channnel opened ",conn.provider.id, dataChannel.peer);
+        dataChannel.send('Hello from ' + dataChannel.provider.id);
       });
     }
 </script>
